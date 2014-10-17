@@ -1,3 +1,5 @@
 <?php
-    require_once 'init.php';
+require_once 'core/init.php';
+
+DB::getInstance();
 ?>
