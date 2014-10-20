@@ -33,8 +33,30 @@ if(Input::exists()) {
         ));
 
         if($validation->passed()) {
-            Session::flash('success', 'You registered successfully!');
-            header('Location: index.php');
+            //Session::flash('success', 'You registered successfully!');
+            //header('Location: index.php');
+            $user = new User();
+
+            $salt = Hash::salt(32);
+
+            try {
+                $user->create(array(
+                    'username' => Input::get('username'),
+                    'password' => Hash::make(Input::get('password'), $salt),
+                    'salt' => $salt,
+                    'name' => Input::get('name'),
+                    'joined' => date('Y-m-d H:i:s'),
+                    'group' => 1,
+                    'email' => Input::get('email'),
+                    'mobile' => Input::get('mobile')
+                ));
+
+                Session::flash('home', 'You are Registered Successfully.');
+                header('Location: index.php');
+
+            } catch(Exception $e) {
+                die($e->getMessage());
+            }
         } else {
             foreach($validation->errors() as $error) {
                 echo $error, '<br>';
@@ -59,8 +81,8 @@ if(Input::exists()) {
                     <label>Retype Password : <input type="password" name="password_again" class="form-control"></label>
 
                     <label>Name : <input type="text" name="name" class="form-control" value="<?php echo escape(Input::get('name')); ?>"></label>
-                    <label>Email : <input type="email" name="email" class="form-control" <?php echo escape(Input::get('email')); ?>></label>
-                    <label>Mobile : <input type="text" name="mobile" class="form-control" <?php echo escape(Input::get('mobile')); ?>></label>
+                    <label>Email : <input type="email" name="email" class="form-control" value="<?php echo escape(Input::get('email')); ?>"></label>
+                    <label>Mobile : <input type="text" name="mobile" class="form-control" value="<?php echo escape(Input::get('mobile')); ?>"></label>
 
                     <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 
