@@ -1,5 +1,6 @@
 <?php
 require_once 'core/init.php';
+$user = new User();
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,7 +24,7 @@ require_once 'core/init.php';
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Brand</a>
+            <a class="navbar-brand" href="index.php">Steel Shoppers</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -51,16 +52,30 @@ require_once 'core/init.php';
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Link</a></li>
+                <?php
+                if($user->isLoggedIn()) {
+                ?>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $user->data()->username; ?><span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
+                        <li><a href="profile.php?user=<?php echo escape($user->data()->username); ?>">Profile</a></li>
                         <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
+                        <li><a href="changepassword.php">Change Password</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
+                        <li><a href="update.php">Settings</a></li>
                     </ul>
+                </li>
+                <?php
+                }
+                ?>
+                <li>
+                    <?php
+                    if($user->isLoggedIn()) {
+                        echo '<a href="logout.php"><span class="glyphicon glyphicon-log-out"></span></a>';
+                    } else {
+                        echo '<a href="login.php"><span class="glyphicon glyphicon-log-in"></span></a>';
+                    }
+                    ?>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
