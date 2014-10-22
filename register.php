@@ -52,7 +52,7 @@ if(Input::exists()) {
                 ));
 
                 Session::flash('home', 'You are Registered Successfully.');
-                header('Location: index.php');
+                Redirect::to('index.php');
 
             } catch(Exception $e) {
                 die($e->getMessage());
