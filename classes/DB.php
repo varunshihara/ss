@@ -73,23 +73,23 @@ class DB {
     }
 
     public function insert($table, $fields = array()) {
-            $keys = array_keys($fields);
-            $values = '';
-            $x = 1;
+        $keys = array_keys($fields);
+        $values = '';
+        $x = 1;
 
-            foreach($fields as $field) {
-                $values .= '?';
-                if($x < count($fields)) {
-                    $values .= ', ';
-                }
-                $x++;
+        foreach($fields as $field) {
+            $values .= '?';
+            if($x < count($fields)) {
+                $values .= ', ';
             }
+            $x++;
+        }
 
-            $sql = "INSERT INTO {$table} (`" . implode('`, `', $keys) . "`) VALUES ({$values})";
+        $sql = "INSERT INTO {$table} (`" . implode('`, `', $keys) . "`) VALUES ({$values})";
 
-            if(!$this->query($sql, $fields)->error()) {
-                return true;
-            }
+        if(!$this->query($sql, $fields)->error()) {
+            return true;
+        }
         return false;
     }
 
