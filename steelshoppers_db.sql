@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2014 at 12:57 PM
+-- Generation Time: Oct 24, 2014 at 05:02 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -27,10 +27,19 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `ss_category` (
-  `id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `category` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `ss_category`
+--
+
+INSERT INTO `ss_category` (`id`, `category`) VALUES
+(1, 'Glass'),
+(2, 'Plates'),
+(3, 'Cup');
 
 -- --------------------------------------------------------
 

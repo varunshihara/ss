@@ -72,6 +72,7 @@ class DB {
         return $this->action('DELETE', $table, $where);
     }
 
+    #insert data in table
     public function insert($table, $fields = array()) {
         $keys = array_keys($fields);
         $values = '';
@@ -93,6 +94,7 @@ class DB {
         return false;
     }
 
+    # Update table
     public function update($table, $id, $fields) {
         $set = '';
         $x = 1;

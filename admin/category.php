@@ -21,7 +21,7 @@ require_once 'header.php';
                     </div>
                     <div class="col-sm-3">
                         <center>
-                        <a href="#" class="btn-sm btn-danger">New</a>
+                        <a href="add-category.php" class="btn-sm btn-danger">New</a>
                         <a href="#" class="btn-sm btn-danger">Edit</a>
                         <a href="#" class="btn-sm btn-danger">Delete</a>
                         </center>
@@ -29,7 +29,32 @@ require_once 'header.php';
                 </div>
             </div>
             <div class="panel-body">
+                <table class="table table-bordered table-condensed table-hover">
+                    <tr>
+                        <th><input type="checkbox" name="all"></th>
+                        <th>Category Name</th>
+                        <th>Action</th>
+                    </tr>
 
+
+
+                    <tr>
+                        <td><input type="checkbox" name="all">
+                            <?php
+                            $db = DB::getInstance();
+                            $data = $db->action('SELECT *', 'ss_category', array('1', '=', '1'));
+                            print_r($data->first());
+                            while($row = mysql_fetch_array($data)) {
+                            foreach($row as $key => $value) {
+                                echo $value;
+                            }
+                            }
+                            ?>
+                        </td>
+                        <td>Category Name</td>
+                        <td><a href="#">Edit</a></td>
+                    </tr>
+                </table>
             </div>
         </div>
 
