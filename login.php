@@ -18,7 +18,12 @@ if(Input::exists()) {
             $login = $user->login(Input::get('username'), Input::get('password'), $remember);
 
             if($login) {
-                Redirect::to('index.php');
+                if($user->hasPermission('admin')) {
+                    Redirect::to('admin/index.php');
+                } else {
+                    Redirect::to('index.php');
+                }
+
             } else {
                 echo 'Sorry, Login Failed.';
             }
@@ -34,6 +39,11 @@ if(Input::exists()) {
 
         <div class="col-md-3"></div>
         <div class="col-md-6">
+            <?php
+                if(Session::exists('register')) {
+                echo '<div class="alert alert-success" role="alert">' . Session::flash('register') . '</div><br>';
+                }
+            ?>
 
             <div class="panel panel-success">
                 <div class="panel-heading">

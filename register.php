@@ -1,6 +1,8 @@
 <?php
 require_once "header.php";
-
+if($user->isLoggedIn()) {
+    Redirect::to('profile.php?user='.$user->data()->username);
+}
 if(Input::exists()) {
     if(Token::check(Input::get('token'))) {
         $validate = new Validate();
@@ -51,8 +53,8 @@ if(Input::exists()) {
                     'mobile' => Input::get('mobile')
                 ));
 
-                Session::flash('home', 'You are Registered Successfully.');
-                Redirect::to('index.php');
+                Session::flash('register', 'Registration Successfully. You can now login to continue shopping.');
+                Redirect::to('login.php');
 
             } catch(Exception $e) {
                 die($e->getMessage());

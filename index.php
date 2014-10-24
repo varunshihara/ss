@@ -3,8 +3,9 @@
 
 require_once 'header.php';
 if(Session::exists('home')) {
-    echo Session::flash('home');
+    echo '<div class="alert alert-success" role="alert">' . Session::flash('home') . '</div><br>';
 }
+
 
 if($user->isLoggedIn()) {
     echo '<a href="#">Hello, ' . $user->data()->username . '</a>';
