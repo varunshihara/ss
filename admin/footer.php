@@ -3,7 +3,7 @@
 <footer>
     <center>
         <hr>
-        <p>&copy; Steel Shoppers | 2014</p>
+        <p>&copy; <a href="\ss/index.php">Steel Shoppers</a> | 2014</p>
         <hr>
     </center>
 </footer>

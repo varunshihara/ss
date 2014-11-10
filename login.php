@@ -20,6 +20,8 @@ if(Input::exists()) {
             if($login) {
                 if($user->hasPermission('admin')) {
                     Redirect::to('admin/index.php');
+                } elseif($user->hasPermission('seller')) {
+                    Redirect::to('admin/index.php');
                 } else {
                     Redirect::to('index.php');
                 }

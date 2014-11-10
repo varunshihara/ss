@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+error_reporting();
 $GLOBALS['config'] = array(
     'mysql' => array(
         'host' => '127.0.0.1',
@@ -17,7 +17,6 @@ $GLOBALS['config'] = array(
         'token_name' => 'token'
     )
 );
-
 
 spl_autoload_register(function($class) {
     require_once($_SERVER["DOCUMENT_ROOT"] . 'ss/classes/' . $class . '.php');

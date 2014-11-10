@@ -7,7 +7,7 @@ class Redirect {
                 if(is_numeric($location)) {
                     switch($location) {
                         case 404:
-                            header('HPPT/1.0 404 Not Found');
+                            header('HTTP/1.0 404 Not Found');
                             include 'includes/errors/404.php';
                             exit();
                             break;
