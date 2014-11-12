@@ -1,4 +1,5 @@
 <?php
+
 require_once 'header.php';
 //Permissions....
 
@@ -28,17 +29,16 @@ if(Input::exists()) {
             if ($_FILES["file"]["error"] > 0) {
                 echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
             } else {
-                echo "Upload: " . $_FILES["file"]["name"] . "<br>";
-                echo "Type: " . $_FILES["file"]["type"] . "<br>";
-                echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
-                echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br>";
-                if (file_exists("upload/" . $_FILES["file"]["name"])) {
-                    echo $_FILES["file"]["name"] . " already exists. ";
+                //echo "Upload: " . $_FILES["file"]["name"] . "<br>";
+                //echo "Type: " . $_FILES["file"]["type"] . "<br>";
+                //echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
+                //echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br>";
+
+                $image = Input::get('id') . '.' .$extension;
+                if (file_exists("../product-images/" . $image)) {
+                    echo $image . " already exists. ";
                 } else {
-                    move_uploaded_file($_FILES["file"]["tmp_name"],
-                        "product-images/" . $_FILES["file"]["name"]);
-                    $path = HTTP_SERVER . "admin/product-images/" . $_FILES["file"]["name"];
-                    echo "Stored in: " . "product-images/" . $_FILES["file"]["name"];
+                    move_uploaded_file($_FILES["file"]["tmp_name"], "../product-images/$image");
                 }
             }
         } else {
@@ -47,9 +47,10 @@ if(Input::exists()) {
         }
 
     else:
-        echo "Invalid fille";
+        echo "Invalid file";
     endif;
 // Upload file Ends.........
+
     $db = DB::getInstance();
     $db->insert('ss_item', array(
         'name' => Input::get('name'),
@@ -57,11 +58,12 @@ if(Input::exists()) {
         'description' => Input::get('description'),
         'category' => Input::get('category'),
         'seller_id' => $user->data()->id,
-        'image' => $path
+        'image' => $image
     ));
 
+
     Session::flash('item', 'New Item added successfully.');
-    Redirect::to('add-item.php');
+    Redirect::to("../product-images/index.php?image=$image");
 }
 ?>
 

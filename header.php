@@ -37,8 +37,8 @@ $user = new User();
                     $count = $category->rows();
                     for($x = 0; $x<$count; $x++) {
                     ?>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $data->results()[$x]->category; ?></a>
+                    <li>
+                        <a href="category.php?category=<?php echo $data->results()[$x]->category; ?>"><?php echo $data->results()[$x]->category; ?></a>
                     </li>
                     <?php
                     }
@@ -63,6 +63,7 @@ $user = new User();
                 <?php
                 }
                 ?>
+                <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
                 <li>
                     <?php
                     if($user->isLoggedIn()) {

@@ -13,25 +13,34 @@ if(Session::exists('home')) {
     echo '<div class="alert alert-success" role="alert">' . Session::flash('home') . '</div><br>';
 }
 
-/**
- * Checking if user is LoggedIn, to perform the task.
- */
-if($user->isLoggedIn()) {
-    echo '<a href="#">Hello, ' . $user->data()->username . '</a>';
+?>
+<div class="container">
 
-    /**
-     * Checking if user is Admin or Not.
-     */
+        <div class="row">
+            <div class="col-sm-12 col-md-8 col-lg-8 table-bordered">
+                <div class="jumbotron">
+                    <img src="images/jumbotron.jpg" width="100%">
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-3 col-lg-3 col-lg-offset-1 col-md-offset-1 table-bordered">
+                <p>Side bar</p>
+            </div>
+        </div>
 
-    if($user->hasPermission('admin')) {
-        echo '<br> You are admin';
-    }
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-4 table-bordered">
+                <p>Some data here</p>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-4 table-bordered">
+                <p>Some data here</p>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4 table-bordered">
+                <p>Some data here</p>
+            </div>
+        </div>
 
-    if($user->hasPermission('seller')) {
-        echo '<br> You are seller';
-    }
-}
-
+</div>
+<?php
 /**
  * Include Footer file
  */

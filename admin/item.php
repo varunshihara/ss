@@ -27,7 +27,7 @@ if(!$user->hasPermission('admin')) {
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-sm-9">
-                            <h3 class="panel-title">Add Category</h3>
+                            <h3 class="panel-title">Add Items</h3>
                         </div>
                         <div class="col-sm-3">
                             <center>
@@ -62,11 +62,11 @@ if(!$user->hasPermission('admin')) {
                                     <!-- id (checkbox)-->
                                     <td><input type="checkbox" id="<?php echo $data->results()[$x]->id; ?>" name="id" value="<?php echo $data->results()[$x]->id; ?>"></td>
                                     <!-- image -->
-                                    <td><label for="<?php echo $data->results()[$x]->id; ?>"><img src="<?php echo $data->results()[$x]->image; ?>" width="100px" style="margin: 0 0;"></label></td>
+                                    <td><label for="<?php echo $data->results()[$x]->id; ?>"><img src="../product-images/thumb-<?php echo $data->results()[$x]->image; ?>" style="margin: 0 0;"></label></td>
                                     <!-- item name -->
                                     <td><label for="<?php echo $data->results()[$x]->id; ?>"><?php echo $data->results()[$x]->name; ?></label></td>
                                     <!-- price -->
-                                    <td><label for="<?php echo $data->results()[$x]->id; ?>"><?php echo $data->results()[$x]->price; ?></label></td>
+                                    <td><label for="<?php echo $data->results()[$x]->id; ?>"><?php echo $data->results()[$x]->price; ?> Rs</label></td>
                                     <!-- category -->
                                     <td><label for="<?php echo $data->results()[$x]->id; ?>"><?php echo $data->results()[$x]->category; ?></label></td>
                                     <!-- edit -->
@@ -135,17 +135,16 @@ if(!$user->hasPermission('admin')) {
                                             if ($_FILES["file"]["error"] > 0) {
                                                 echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
                                             } else {
-                                                echo "Upload: " . $_FILES["file"]["name"] . "<br>";
-                                                echo "Type: " . $_FILES["file"]["type"] . "<br>";
-                                                echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
-                                                echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br>";
-                                                if (file_exists("upload/" . $_FILES["file"]["name"])) {
-                                                    echo $_FILES["file"]["name"] . " already exists. ";
+                                                //echo "Upload: " . $_FILES["file"]["name"] . "<br>";
+                                                //echo "Type: " . $_FILES["file"]["type"] . "<br>";
+                                                //echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
+                                                //echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br>";
+
+                                                $image = Input::get('id') . '.' .$extension;
+                                                if (file_exists("../product-images/" . $image)) {
+                                                    echo $image . " already exists. ";
                                                 } else {
-                                                    move_uploaded_file($_FILES["file"]["tmp_name"],
-                                                        "product-images/" . $_FILES["file"]["name"]);
-                                                    $path = HTTP_SERVER . "admin/product-images/" . $_FILES["file"]["name"];
-                                                    echo "Stored in: " . "product-images/" . $_FILES["file"]["name"];
+                                                    move_uploaded_file($_FILES["file"]["tmp_name"], "../product-images/$image");
                                                 }
                                             }
                                         } else {
@@ -163,9 +162,10 @@ if(!$user->hasPermission('admin')) {
                                         'price' => Input::get('price'),
                                         'category'=>Input::get('category'),
                                         'description'=>Input::get('description'),
-                                        'image' => $path
+                                        'image' => $image
                                     ));
-                                    Redirect::to("item.php");
+
+                                    Redirect::to("../product-images/index.php?image=$image");
                                 }
                             }
                             ?>
