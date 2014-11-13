@@ -14,19 +14,6 @@ if(Session::exists('home')) {
 }
 
 ?>
-    <script>
-        $(document).ready(function(){
-            $("#over").css("border", "1px solid #fff");
-
-            $("#over").mouseover(function(){
-                $(this).css({"border":"1px solid #f1f1f1", "boxShadow":"1px 1px 3px #f1f1f1"});
-            });
-
-            $("#over").mouseout(function(){
-                $(this).css({"border":"1px solid #fff", "boxShadow":"0px 0px 0px"});
-            });
-        });
-    </script>
 
     <div class="container">
 
@@ -39,7 +26,7 @@ if(Session::exists('home')) {
             <div class="col-sm-12 col-md-8 col-lg-8">
 
                 <div class="jumbotron">
-                <!--Image Slider here-->
+                    <!--Image Slider here-->
                 </div>
 
                 <?php
@@ -55,30 +42,28 @@ if(Session::exists('home')) {
                         <div class="row">
                             <?php
                             for($y = 0; $y < 4; $y++) {
-                            ?>
+                                ?>
                                 <div class="col-sm-6 col-md-4 col-lg-3">
                                     <?php
                                     if($x>=$count) {
                                         echo '';
                                     } else {
                                         ?>
-                                        <div id="over">
-                                            <img src="product-images/thumb-<?=$items[$x]->image ?>"><br>
-                                            <div><a href="item.php?id=<?=$items[$x]->id ?>"><?=$items[$x]->name ?></a></div>
-                                            <div><hr><b>Price : <?=$items[$x]->price ?></b><hr></div>
-                                            <div><?=$items[$x]->description ?><hr></div>
-                                            <div><button class="btn btn-success btn-block">Add to Cart</button></div>
-                                        </div>
-                                        <?php
+                                        <img src="product-images/thumb-<?=$items[$x]->image ?>"><br>
+                                        <div><?=$items[$x]->name ?></div>
+                                        <div><hr><b>Price : <?=$items[$x]->price ?></b><hr></div>
+                                        <div><?=$items[$x]->description ?><hr></div>
+                                        <div><button class="btn btn-success btn-block">Add to Cart</button></div>
+                                    <?php
                                     }
                                     ?>
                                 </div>
-                            <?php
-                            $x++;
+                                <?php
+                                $x++;
                             }
                             ?>
                         </div>
-                        <?php
+                    <?php
                     }
                 }
                 ?>
@@ -87,8 +72,9 @@ if(Session::exists('home')) {
 
         </div>
 
-    </div>
 
+
+    </div>
 
 <?php
 /**

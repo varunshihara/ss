@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2014 at 12:03 PM
+-- Generation Time: Nov 13, 2014 at 11:25 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `ss_category` (
   `category` varchar(200) NOT NULL,
   `description` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `ss_category`
@@ -40,7 +40,8 @@ CREATE TABLE IF NOT EXISTS `ss_category` (
 INSERT INTO `ss_category` (`id`, `category`, `description`) VALUES
 (1, 'Glass', 'Glass Description'),
 (2, 'Plates', 'Plates Description'),
-(6, 'Spoon', '<p><strong>Steel Spoons</strong></p>');
+(6, 'Spoon', '<p><strong>Steel Spoons</strong></p>'),
+(7, 'Kitchen Container', 'Steel Kitchen Container Vessels');
 
 -- --------------------------------------------------------
 
@@ -79,17 +80,18 @@ CREATE TABLE IF NOT EXISTS `ss_item` (
   `seller_id` int(10) DEFAULT NULL,
   `image` varchar(250) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
 
 --
 -- Dumping data for table `ss_item`
 --
 
 INSERT INTO `ss_item` (`id`, `name`, `price`, `description`, `category`, `seller_id`, `image`) VALUES
-(1, 'Glass Set - 6', 150, '<p>Steel Glass Set Description.</p>', 'Glass', NULL, 'http://localhost/ss/admin/product-images/4-bain-mary-container-500x500.jpg'),
-(2, 'Large Plates - 3', 300, '<p>Large Plates Sample Description.</p>', 'Plates', NULL, 'http://localhost/ss/admin/product-images/High-quality-stainless-steel-kitchen-utensils-cake-pan-font-b-rack-b-font-barbecue-font-b.jpg'),
-(23, 'Glass Set - 6', 250, 'Glass Description', 'Glass', 15, 'http://localhost/ss/admin/product-images/4-bain-mary-container-500x500.jpg'),
-(24, 'Kitchen Spoon Set - 6', 650, '<p>Spoon&nbsp;Description</p>', 'Spoon', 15, 'http://localhost/ss/admin/product-images/71qJ+Zx0E7L._SL1500_.jpg');
+(1, 'Cooking Spoons - 4', 650, '<p>Kitchen Spoon Description.</p>', 'Spoon', NULL, '1.jpg'),
+(2, 'Large Plates - 3', 300, '<p>Large Plates Sample Description.</p>', 'Plates', NULL, '2.jpg'),
+(23, 'Glass Set - 6', 250, '<p>Glass Description</p>', 'Glass', 15, '23.jpg'),
+(24, 'Kitchen Spoon Set - 6', 650, '<p>Spoon&nbsp;Description</p>', 'Spoon', 15, '24.jpg'),
+(29, 'Bhagoni', 650, 'Bhagoni Description here', 'Kitchen Container', 15, '.jpg');
 
 -- --------------------------------------------------------
 
