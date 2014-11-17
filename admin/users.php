@@ -77,13 +77,13 @@ if(!$user->hasPermission('admin')) {
                     if(Input::exists('get')) {
                         $role = Input::get('role');
                         if($role == 'admin') {
-                            $data = $admin;
+                            $data = $db->action('SELECT *', 'ss_user', array('`group`', '=', '2'));
                             $y = $countAdmin;
                         } elseif($role == 'seller') {
-                            $data = $seller;
+                            $data = $db->action('SELECT *', 'ss_user', array('`group`', '=', '3'));
                             $y = $countSeller;
                         } elseif($role == 'customer') {
-                            $data = $customer;
+                            $data = $db->action('SELECT *', 'ss_user', array('`group`', '=', '1'));
                             $y = $countCustomer;
                         } else {
                             $data = $all;

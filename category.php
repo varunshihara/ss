@@ -63,9 +63,9 @@ if(Session::exists('home')) {
                                     } else {
                                         ?>
                                         <div id="over">
-                                            <img src="product-images/thumb-<?=$items[$x]->image ?>"><br>
+                                            <img src="product-images/<?=$items[$x]->image ?>" width="100%"><br>
                                             <div><a href="item.php?id=<?=$items[$x]->id ?>"><?=$items[$x]->name ?></a></div>
-                                            <div><hr><b>Price : <?=$items[$x]->price ?></b><hr></div>
+                                            <div><hr><b>Rs : <?=$items[$x]->price ?></b><hr></div>
                                             <div><?=$items[$x]->description ?><hr></div>
                                             <div><button class="btn btn-success btn-block">Add to Cart</button></div>
                                         </div>

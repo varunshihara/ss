@@ -24,7 +24,7 @@ if(Input::exists()) {
                 || ($_FILES["file"]["type"] == "image/pjpeg")
                 || ($_FILES["file"]["type"] == "image/x-png")
                 || ($_FILES["file"]["type"] == "image/png"))
-            && ($_FILES["file"]["size"] < 2000000000)
+            && ($_FILES["file"]["size"] < 20000000)
             && in_array($extension, $allowedExts)) {
             if ($_FILES["file"]["error"] > 0) {
                 echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
@@ -63,7 +63,7 @@ if(Input::exists()) {
 
 
     Session::flash('item', 'New Item added successfully.');
-    Redirect::to("../product-images/index.php?image=$image");
+    Redirect::to("add-item.php");
 }
 ?>
 

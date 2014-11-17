@@ -62,7 +62,11 @@ if(!$user->hasPermission('admin')) {
                                     <!-- id (checkbox)-->
                                     <td><input type="checkbox" id="<?php echo $data->results()[$x]->id; ?>" name="id" value="<?php echo $data->results()[$x]->id; ?>"></td>
                                     <!-- image -->
-                                    <td><label for="<?php echo $data->results()[$x]->id; ?>"><img src="../product-images/thumb-<?php echo $data->results()[$x]->image; ?>" style="margin: 0 0;"></label></td>
+                                    <td>
+                                        <label for="<?php echo $data->results()[$x]->id; ?>">
+                                            <img src="../product-images/<?php echo $data->results()[$x]->image; ?>" width="150">
+                                        </label>
+                                    </td>
                                     <!-- item name -->
                                     <td><label for="<?php echo $data->results()[$x]->id; ?>"><?php echo $data->results()[$x]->name; ?></label></td>
                                     <!-- price -->
@@ -148,7 +152,7 @@ if(!$user->hasPermission('admin')) {
                                                 }
                                             }
                                         } else {
-                                            echo "Invalid filee";
+                                            echo "Invalid file";
                                             echo "Type: " . $_FILES["file"]["type"] . "<br>";
                                         }
 
