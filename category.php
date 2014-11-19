@@ -14,19 +14,7 @@ if(Session::exists('home')) {
 }
 
 ?>
-    <script>
-        $(document).ready(function(){
-            $("#over").css("border", "1px solid #fff");
 
-            $("#over").mouseover(function(){
-                $(this).css({"border":"1px solid #f1f1f1", "boxShadow":"1px 1px 3px #f1f1f1"});
-            });
-
-            $("#over").mouseout(function(){
-                $(this).css({"border":"1px solid #fff", "boxShadow":"0px 0px 0px"});
-            });
-        });
-    </script>
 
     <div class="container">
 
@@ -67,7 +55,7 @@ if(Session::exists('home')) {
                                             <div><a href="item.php?id=<?=$items[$x]->id ?>"><?=$items[$x]->name ?></a></div>
                                             <div><hr><b>Rs : <?=$items[$x]->price ?></b><hr></div>
                                             <div><?=$items[$x]->description ?><hr></div>
-                                            <div><button class="btn btn-success btn-block">Add to Cart</button></div>
+                                            <div><button class="btn btn-success btn-block" onclick="cart('<?=$items[$x]->id ?>')">Add to Cart</button></div>
                                         </div>
                                         <?php
                                     }

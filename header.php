@@ -12,6 +12,42 @@ $user = new User();
     <script src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
 
+    <script>
+        function cart(id)
+        {
+            var xmlhttp;
+            if (window.XMLHttpRequest)
+            {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            }
+            else
+            {// code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function()
+            {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                    document.getElementById("cart").innerHTML='';
+                }
+            }
+            xmlhttp.open("POST","cart.php",true);
+            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlhttp.send("id=" + id);
+        }
+
+        $(document).ready(function(){
+            $("#over").css("border", "1px solid #fff");
+
+            $("#over").mouseover(function(){
+                $(this).css({"border":"1px solid #f1f1f1", "boxShadow":"1px 1px 3px #f1f1f1"});
+            });
+
+            $("#over").mouseout(function(){
+                $(this).css({"border":"1px solid #fff", "boxShadow":"0px 0px 0px"});
+            });
+        });
+    </script>
 </head>
 <body>
 
@@ -64,7 +100,7 @@ $user = new User();
                 <?php
                 }
                 ?>
-                <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+                <li><a href="cart.php"><span class="glyphicon glyphicon-shopping-cart"><span class="badge" id="cart"></span></span></a></li>
                 <li>
                     <?php
                     if($user->isLoggedIn()) {

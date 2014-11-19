@@ -34,9 +34,9 @@ if(Input::exists('get')) {
                     <div class="col-sm-3">
                         <p><?=$item[0]->description ?></p>
                         <div class="btn-buy">
-                            <form action="#" method="post">
+                            <form action="cart.php" method="post">
                                 <input type="hidden" name="id" value="<?=$item[0]->id ?>">
-                                <button class="btn btn-primary btn-block">Add to Cart</button>
+                                <button type="submit" class="btn btn-primary btn-block">Add to Cart</button>
                             </form>
                             <br>
                             <form action="#" method="post">
