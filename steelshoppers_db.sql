@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2014 at 11:25 AM
+-- Generation Time: Nov 19, 2014 at 12:30 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -133,14 +133,7 @@ CREATE TABLE IF NOT EXISTS `ss_user_session` (
   `user_id` int(11) NOT NULL,
   `hash` varchar(70) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `ss_user_session`
---
-
-INSERT INTO `ss_user_session` (`id`, `user_id`, `hash`) VALUES
-(2, 15, '03860a64158cd096fff8edba7faf2254edb4ceac0af31dfce98ed108ee468d91');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

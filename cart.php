@@ -4,7 +4,6 @@
  * Contains Navbar.
  */
 require_once 'header.php';
-
 if(isset($_POST['id'])) {
     $id = $_POST['id'];
     $wasFound = false;
@@ -26,20 +25,17 @@ if(isset($_POST['id'])) {
                 }
             }
         }
-
         if($wasFound == false) {
             array_push($_SESSION['cart'], array('id' => $id, 'quantity' => 1));
         }
     }
 }
-
 /**
  * to empty the shopping cart
  */
 if(isset($_GET['emptycart']) && $_GET['emptycart'] == "true") {
     unset($_SESSION['cart']);
 }
-
 /**
  * render cart for the user to view
  */
@@ -80,21 +76,29 @@ if(!isset($_SESSION['cart']) || count($_SESSION['cart']) < 1) {
         }*/
     }
     $totalCart = "Rs." . $totalCart;
+    $cartOutput .= "<tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><b>" . $totalCart . "</b></td>
+                            <td></td>
+                        </tr>";
     $cartOutput .= "</table>";
-    $cartOutput .= $totalCart . "</div>";
+    $cartOutput .= "</div>";
 }
-
 ?>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-8 col-lg-8 table-bordered">
-            <?=$cartOutput; ?>
-        </div>
-        <div class="col-sm-12 col-md-3 col-lg-3 col-lg-offset-1 col-md-offset-1 table-bordered">
-            <p><a href="?emptycart=true">Empty Cart</a></p>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-8 col-lg-8">
+                <?=$cartOutput; ?>
+            </div>
+            <div class="col-sm-12 col-md-3 col-lg-3 col-lg-offset-1 col-md-offset-1">
+                <a href='?emptycart=true' class='btn btn-sm btn-default'><span class='glyphicon glyphicon-inbox'></span> Empty Cart</a>
+            </div>
         </div>
     </div>
-</div>
 <?php
 /**
  * Include Footer file
