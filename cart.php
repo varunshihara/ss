@@ -13,7 +13,7 @@ if(isset($_POST['id'])) {
      */
     if(!isset($_SESSION['cart']) || count($_SESSION['cart']) < 1) {
         // Run if cart is empty or not set
-        $_SESSION['cart'] = array(1 => array('id' => $id, 'quantity' => 1));
+        $_SESSION['cart'] = array(0 => array('id' => $id, 'quantity' => 1));
     } else {
         // Run if cart has at least item in it.
         foreach($_SESSION['cart'] as $eachItem) {
@@ -30,12 +30,48 @@ if(isset($_POST['id'])) {
         }
     }
 }
+
 /**
  * to empty the shopping cart
  */
 if(isset($_GET['emptycart']) && $_GET['emptycart'] == "true") {
     unset($_SESSION['cart']);
 }
+
+/**
+ * to change item quantity
+ */
+if(isset($_POST['itemIndex']) && $_POST['itemIndex'] != "") {
+
+    $itemIndex = $_POST['itemIndex'];
+    $quantity = preg_replace('#[^0-9]#i','',$_POST['quantity']);
+    if($quantity < 1) { $quantity = 1; }
+    if($quantity == "") { $quantity = 1; }
+    $i = 0;
+    foreach($_SESSION['cart'] as $eachItem) {
+        $i++;
+        while(list($key, $value) = each($eachItem)) {
+            if($key == 'id' && $value == $itemIndex) {
+                array_splice($_SESSION['cart'], $i-1, 1, array(array('id' => $itemIndex, 'quantity' => $quantity)));
+            }
+        }
+    }
+}
+
+/**
+ * removing item/s from cart
+ */
+if(isset($_POST['arrayIndex']) && $_POST['arrayIndex']!= "") {
+    $arrayIndex = $_POST['arrayIndex'];
+    if(count($_SESSION['cart']) <= 1) {
+        unset($_SESSION['cart']);
+    } else {
+        unset($_SESSION['cart']["$arrayIndex"]);
+        sort($_SESSION['cart']);
+        echo count($_SESSION['cart']);
+    }
+}
+
 /**
  * render cart for the user to view
  */
@@ -59,19 +95,33 @@ if(!isset($_SESSION['cart']) || count($_SESSION['cart']) < 1) {
     foreach($_SESSION['cart'] as $eachItem) {
         $db = DB::getInstance();
         $item = $db->get('ss_item', array('id', '=', $eachItem['id']))->results();
-        $i++;
+
         $totalPrice = $item[0]->price * $eachItem['quantity'];
         $totalCart = $totalPrice + $totalCart;
+
+        /*setlocale(LC_MONETARY, "en_US");
+        $totalPrice = money_format("%10.2n", $totalPrice);*/
         $cartOutput .= "<tr>
                             <td><img src='product-images/" . $item[0]->image ."' width='80px'></td>
                             <td><a href='item.php?id=" . $item[0]->id . "'>" . $item[0]->name ."</a></td>
                             <td>" . $item[0]->description ."</td>
                             <td>Rs. " . $item[0]->price ."</td>
-                            <td>" . $eachItem['quantity'] ."</td>
+                            <td>
+                                <form action='cart.php' method='post'>
+                                    <input type='text' onchange='this.form.submit()' name='quantity' value='" . $eachItem['quantity'] . "' maxlength='2' class='form-control'>
+                                    <input type='hidden' name='itemIndex' value='" . $item[0]->id . "'>
+                                </form>
+                            </td>
                             <td>Rs. " . $totalPrice ."</td>
-                            <td><button class='btn btn-danger btn-sm'>Remove</button></td>
+                            <td>
+                                <form action='cart.php' method='post'>
+                                    <input type='hidden' name='arrayIndex' value='" . $i . "'>
+                                    <button type='submit' name='remove" . $item[0]->id . "' class='btn btn-danger btn-sm'>Remove</button>
+                                </form>
+                            </td>
                         </tr>";
-        /*while(list($key, $value) = each($eachItem)) {
+        $i++;
+        /*while(list($key, $value) = each($eachItem)) {$eachItem['quantity']
             $cartOutput .= "$key : $value <br>";
         }*/
     }

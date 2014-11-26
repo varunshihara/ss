@@ -45,7 +45,7 @@ class DB {
         return $this;
     }
 
-    public function action($action, $table, $where = array()) {
+    public function action($action, $table, $where = array(), $limit = 30) {
         if(count($where) === 3) {
             $operators = array('=', '>', '<', '>=', '<=');
 
@@ -54,7 +54,7 @@ class DB {
             $value = $where[2];
 
             if(in_array($operator, $operators)) {
-                $sql = "{$action} FROM {$table} WHERE {$field} {$operator} ?";
+                $sql = "{$action} FROM {$table} WHERE {$field} {$operator} ? LIMIT {$limit}";
 
                 if(!$this->query($sql, array($value))->error()) {
                     return $this;
@@ -130,5 +130,23 @@ class DB {
 
     public function count() {
         return $this->_count;
+    }
+
+    public function searchEngine($table, $col, $pattern) {
+
+        $sql = "SELECT * FROM `{$table}` WHERE `{$col}` LIKE '%{$pattern}%'";
+
+        if(!$this->query($sql)->error()) {
+            if($this->_count > 0) {
+                $data = "<table class='table table-bordered table-hover'>";
+                for($x=0; $x<$this->_count; $x++) {
+                    $data .= "<tr><td>{$this->results()[$x]->$col}</td></tr>";
+                }
+                $data .= "</table>";
+
+                return $data;
+            }
+        }
+        return false;
     }
 }

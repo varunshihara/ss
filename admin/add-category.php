@@ -10,10 +10,19 @@ if(!$user->hasPermission('admin')) {
 
 if(Input::exists()) {
     $db = DB::getInstance();
-    $db->insert('ss_category', array(
-        'category' => Input::get('name'),
-        'description' => Input::get('description')
-    ));
+    if(Input::get('parent-category')=='null') {
+        $db->insert('ss_category', array(
+            'category' => Input::get('name'),
+            'description' => Input::get('description')
+        ));
+    } else {
+        $db->insert('ss_sub_category', array(
+            'category_id' => Input::get('parent-category'),
+            'sub_category' => Input::get('name'),
+            'description' => Input::get('description')
+        ));
+    }
+
 
     Session::flash('category', 'New Category created successfully.');
     Redirect::to('add-category.php');
@@ -57,10 +66,32 @@ if(Input::exists()) {
                         </div><br>
                         <div class="row">
                             <div class="col-md-3">
-                                <label for="elm1">Description :</label>
+                                <label for="parent-category">Parent Category :</label>
                             </div>
                             <div class="col-sm-9">
-                                <textarea id="elm1" name="description" class="form-control"></textarea>
+                                <select name="parent-category">
+                                    <option value="null">Select Parent Category</option>
+                                    <?php
+                                    $category = new Category();
+                                    if($category->exist()){
+                                        $data = $category->get();
+                                        $count = $category->rows();
+                                        for($x = 0; $x<$count; $x++) {
+                                            ?>
+                                            <option value="<?=$data->results()[$x]->id; ?>"><?=$data->results()[$x]->category; ?></option>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="description">Description :</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <textarea id="description" name="description" class="form-control"></textarea>
                             </div>
                         </div>
 

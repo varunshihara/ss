@@ -7,6 +7,8 @@ if(!$user->hasPermission('admin')) {
     Redirect::to($_SERVER["DOCUMENT_ROOT"] . 'ss/');
 }
 // End Permissions....
+
+
 ?>
     <div class="row">
 
@@ -19,6 +21,16 @@ if(!$user->hasPermission('admin')) {
             }
 
             $db = DB::getInstance();
+
+            /**
+             * to change user role
+             */
+            if(Input::exists() && Input::get('group')) {
+                $db->update("ss_user", Input::get('id'), array(
+                    'group' => Input::get('group')
+                ));
+                //echo $db->error();
+            }
 
             /**
              * Admins data
@@ -96,30 +108,45 @@ if(!$user->hasPermission('admin')) {
 
                     for($x = 0; $x<$y; $x++) {
                         ?>
-                        <!-- Output items -->
+
                         <tr>
-                            <!-- id (checkbox)-->
+
                             <td><input type="checkbox" id="<?php echo $data->results()[$x]->id; ?>" name="id" value="<?php echo $data->results()[$x]->id; ?>"></td>
-                            <!-- image -->
+
                             <td><label for="<?php echo $data->results()[$x]->id; ?>"><?php echo $data->results()[$x]->username; ?></label></td>
-                            <!-- item name -->
+
                             <td><label for="<?php echo $data->results()[$x]->id; ?>"><?php echo $data->results()[$x]->name; ?></label></td>
-                            <!-- price -->
+
                             <td><label for="<?php echo $data->results()[$x]->id; ?>"><?php echo $data->results()[$x]->email; ?></label></td>
-                            <!-- category -->
-                            <td><label for="<?php echo $data->results()[$x]->id; ?>">
-                                    <?php
-                                    if($data->results()[$x]->group == 1) {
-                                        echo "User";
-                                    } elseif($data->results()[$x]->group == 2) {
-                                        echo "Admin";
-                                    } elseif($data->results()[$x]->group == 3) {
-                                        echo "Seller";
-                                    }
-                                    ?>
-                                </label>
+
+                            <td>
+                                <form method='post' action='users.php'>
+                                    <input type="hidden" name="id" value="<?=$data->results()[$x]->id ?>">
+                                <?php
+                                if($data->results()[$x]->group == 1) {
+                                    echo "<select name='group' onchange='this.form.submit()'>
+                                                <option value='1'>User</option>
+                                                <option value='2'>Admin</option>
+                                                <option value='3'>Seller</option>
+                                            </select>";
+                                } elseif($data->results()[$x]->group == 2) {
+                                    echo "<select name='group' onchange='this.form.submit()'>
+                                                <option value='2'>Admin</option>
+                                                <option value='1'>User</option>
+                                                <option value='3'>Seller</option>
+                                            </select>";
+                                } elseif($data->results()[$x]->group == 3) {
+                                    echo "<select name='group' onchange='this.form.submit()'>
+                                            <option value='3'>Seller</option>
+                                            <option value='2'>Admin</option>
+                                            <option value='1'>User</option>
+                                        </select>
+                                    ";
+                                }
+                                ?>
+                                </form>
                             </td>
-                            <!-- edit -->
+
                             <td><a href="#">Edit</a></td>
                         </tr>
                     <?php   } ?>

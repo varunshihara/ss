@@ -21,17 +21,23 @@ if(Session::exists('home')) {
         <div class="row">
 
             <div class="col-sm-12 col-md-3 col-lg-3 table-bordered">
-                <p>Side bar</p>
+                <p><b>Sellers</b></p><hr>
+                <?php
+                $db = DB::getInstance();
+                $sellers = $db->get('ss_user', array('`group`', '=', '3'));
+                $totalSellers = $sellers->count();
+                $sellers = $sellers->results();
+
+                for($x = 0; $x<$totalSellers; $x++) {
+                    echo '<label><input type="checkbox" name="seller" value="' . $sellers[$x]->id . '"> ' . $sellers[$x]->name . '</label>';
+                }
+                ?>
             </div>
 
             <div class="col-sm-12 col-md-8 col-lg-8">
 
-                <div class="jumbotron">
-                <!--Image Slider here-->
-                </div>
-
                 <?php
-                $db = DB::getInstance();
+
                 if(Input::exists('get')) {
                     $category = Input::get('category');
                     $result = $db->get('ss_item', array('category', '=', $category));

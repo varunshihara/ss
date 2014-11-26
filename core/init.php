@@ -1,5 +1,6 @@
 <?php
 session_start();
+ob_start();
 error_reporting();
 $GLOBALS['config'] = array(
     'mysql' => array(

@@ -13,43 +13,7 @@ $user = new User();
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="engine1/style.css" />
     <script type="text/javascript" src="engine1/jquery.js"></script>
-
-    <script>
-        function cart(id)
-        {
-            var xmlhttp;
-            if (window.XMLHttpRequest)
-            {// code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp=new XMLHttpRequest();
-            }
-            else
-            {// code for IE6, IE5
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange=function()
-            {
-                if (xmlhttp.readyState==4 && xmlhttp.status==200)
-                {
-                    document.getElementById("cart").innerHTML='';
-                }
-            }
-            xmlhttp.open("POST","cart.php",true);
-            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-            xmlhttp.send("id=" + id);
-        }
-
-        $(document).ready(function(){
-            $("#over").css("border", "1px solid #fff");
-
-            $("#over").mouseover(function(){
-                $(this).css({"border":"1px solid #f1f1f1", "boxShadow":"1px 1px 3px #f1f1f1"});
-            });
-
-            $("#over").mouseout(function(){
-                $(this).css({"border":"1px solid #fff", "boxShadow":"0px 0px 0px"});
-            });
-        });
-    </script>
+    <script type="text/javascript" src="js/script.js"></script>
 </head>
 <body>
 
@@ -71,6 +35,13 @@ $user = new User();
             <ul class="nav navbar-nav">
                 <?php
                 $category = new Category();
+                /*$subCategory = $category->subCategory('7');
+                print_r($subCategory->results());*/
+                /*if($subCategory->count()) {
+                    echo "yes";
+                } else {
+                    echo "no";
+                }*/
                 if($category->exist()){
                     $data = $category->get();
                     $count = $category->rows();
@@ -80,7 +51,9 @@ $user = new User();
                         <a href="category.php?category=<?php echo $data->results()[$x]->category; ?>"><?php echo $data->results()[$x]->category; ?></a>
                     </li>
                     <?php
+
                     }
+
                 }
                 ?>
             </ul>
@@ -116,3 +89,12 @@ $user = new User();
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+
+<?php
+/*$subCategory = $category->subCategory('7');
+if($subCategory->count()) {
+    echo($subCategory->results()[0]->sub_category);
+} else {
+    echo "Success";
+}*/
+?>

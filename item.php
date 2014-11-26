@@ -24,15 +24,16 @@ if(Input::exists('get')) {
 
         <div class="row">
 
-            <div class="col-sm-12 col-md-3 col-lg-4">
+            <div class="col-sm-12 col-md-3 col-lg-5">
                 <img src="product-images/<?=$item[0]->image ?>" width="100%">
             </div>
 
-            <div class="col-sm-12 col-md-8 col-lg-8">
+            <div class="col-sm-12 col-md-8 col-lg-7">
                 <h1><?=$item[0]->name ?></h1>
                 <div class="row">
                     <div class="col-sm-3">
                         <p><?=$item[0]->description ?></p>
+                        <p><b>Price : </b>Rs.<?=$item[0]->price ?></p>
                         <div class="btn-buy">
                             <form action="cart.php" method="post">
                                 <input type="hidden" name="id" value="<?=$item[0]->id ?>">

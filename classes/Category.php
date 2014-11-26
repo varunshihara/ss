@@ -21,4 +21,8 @@ class Category {
     public function rows() {
         return $this->_category->count();
     }
+
+    public function subCategory($parentId) {
+        return $this->_db->action("SELECT *", "ss_sub_category", array('category_id', '=', $parentId));
+    }
 }

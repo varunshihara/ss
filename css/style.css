@@ -9,3 +9,22 @@ label {
 hr {
     margin: 5px 0px;
 }
+
+.over {
+    height: 400px;
+    width: 100%;
+    margin: 0px 5px;
+    padding: 5px 5px;
+    /*border: 1px solid #BBBBBB;*/
+}
+
+.image {
+
+}
+
+.info {
+    width: inherit;
+    position: absolute;
+    bottom: 0px;
+
+}
