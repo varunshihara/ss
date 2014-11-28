@@ -26,7 +26,7 @@ if(!$user->hasPermission('admin')) {
              * to change user role
              */
             if(Input::exists() && Input::get('group')) {
-                $db->update("ss_user", Input::get('id'), array(
+                $db->update("`ss_user`", Input::get('id'), array(
                     'group' => Input::get('group')
                 ));
                 //echo $db->error();

@@ -34,24 +34,42 @@ $user = new User();
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <?php
+
+
                 $category = new Category();
-                /*$subCategory = $category->subCategory('7');
-                print_r($subCategory->results());*/
-                /*if($subCategory->count()) {
-                    echo "yes";
-                } else {
-                    echo "no";
-                }*/
+
                 if($category->exist()){
-                    $data = $category->get();
+                    $data = $category->get()->results();
+
+                    //var_dump($data);
                     $count = $category->rows();
                     for($x = 0; $x<$count; $x++) {
+                        $id = $data[$x]->id;
+                        $subCategory = $category->subCategory($id)->results();
+                        if(empty($subCategory)) {
                     ?>
+
                     <li>
-                        <a href="category.php?category=<?php echo $data->results()[$x]->category; ?>"><?php echo $data->results()[$x]->category; ?></a>
+                        <a href="category.php?category=<?php echo $data[$x]->category; ?>"><?php echo $data[$x]->category; ?></a>
                     </li>
                     <?php
-
+                        } else {
+                            ?>
+                            <li class="dropdown">
+                                <a href="category.php?category=<?php echo $data[$x]->category; ?>"  class="dropdown-toggle" data-toggle="dropdown"><?php echo $data[$x]->category; ?> <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <?php
+                                    $subCount = $category->subRows();
+                                    for($y = 0; $y<$subCount; $y++) {
+                                        echo '<li><a href="#">' . $subCategory[$y]->sub_category . '</a></li>';
+                                    }
+                                    ?>
+                                    <li class="divider"></li>
+                                    <li><a href="category.php?category=<?php echo $data[$x]->category; ?>">See all <?php echo $data[$x]->category; ?></a></li>
+                                </ul>
+                            </li>
+                            <?php
+                        }
                     }
 
                 }

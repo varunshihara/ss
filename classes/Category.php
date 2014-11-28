@@ -3,6 +3,7 @@
 class Category {
 
     private $_db,
+            $_subCategory,
             $_category;
 
     public function __construct() {
@@ -23,6 +24,11 @@ class Category {
     }
 
     public function subCategory($parentId) {
-        return $this->_db->action("SELECT *", "ss_sub_category", array('category_id', '=', $parentId));
+        $this->_subCategory = $this->_db->get("ss_sub_category", array('category_id', '=', "$parentId"));
+        return $this->_subCategory;
+    }
+
+    public function subRows() {
+        return $this->_subCategory->count();
     }
 }

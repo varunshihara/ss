@@ -59,7 +59,7 @@ if(Session::exists('home')) {
                         <a href="item.php?id=<?=$items[$x]->id ?>"><?=$items[$x]->name ?></a>
                         <!--<div><hr><b>Rs : <?/*=$items[$x]->price */?></b><hr></div>-->
                         <?=$items[$x]->description ?><hr>
-                        <button class="btn btn-primary btn-block" onclick="cart('<?=$items[$x]->id ?>')">Add to Cart</button>
+                        <button class="btn btn-primary center-block" onclick="cart('<?=$items[$x]->id ?>')">Add to Cart</button>
                     </div>
                 </div>
             </div>
