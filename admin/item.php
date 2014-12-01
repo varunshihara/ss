@@ -3,7 +3,7 @@ require_once 'header.php';
 //Permissions....
 
 
-if(!$user->hasPermission('admin')) {
+if($user->hasPermission('user')) {
     Redirect::to($_SERVER["DOCUMENT_ROOT"] . 'ss/');
 }
 
@@ -131,10 +131,9 @@ if(!$user->hasPermission('admin')) {
                                         if ((($_FILES["file"]["type"] == "image/gif")
                                                 || ($_FILES["file"]["type"] == "image/jpeg")
                                                 || ($_FILES["file"]["type"] == "image/jpg")
-                                                || ($_FILES["file"]["type"] == "image/pjpeg")
                                                 || ($_FILES["file"]["type"] == "image/x-png")
                                                 || ($_FILES["file"]["type"] == "image/png"))
-                                            && ($_FILES["file"]["size"] < 2000000000)
+                                            && ($_FILES["file"]["size"] < 100000000)
                                             && in_array($extension, $allowedExts)) {
                                             if ($_FILES["file"]["error"] > 0) {
                                                 echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
@@ -159,7 +158,7 @@ if(!$user->hasPermission('admin')) {
                                     else:
                                         echo "Invalid fille";
                                     endif;
-                                    // Upload file Ends.........
+                                    // Upload file Ends.
                                     $db = DB::getInstance();
                                     $db->update("ss_item", Input::get("id"), array(
                                         'name' => Input::get('name'),

@@ -3,28 +3,45 @@
 require_once 'header.php';
 //Permissions....
 
-if(!$user->hasPermission('admin')) {
+if($user->hasPermission('user')) {
     Redirect::to($_SERVER["DOCUMENT_ROOT"] . 'ss/');
 }
 
 // End Permissions....
 if(Input::exists()) {
+
+    $db = DB::getInstance();
+
+    if(Input::get('subCategory') == "") {
+        //If sub category is not set.
+        $db->insert('ss_item', array(
+            'name' => Input::get('name'),
+            'price' => Input::get('price'),
+            'description' => Input::get('description'),
+            'category' => Input::get('category'),
+            'seller_id' => $user->data()->id
+        ));
+
+    } else {
+        //If sub category is set
+
+    }
+
     // Upload file Starts.........
 
+    $lastId = $db->lastId();
     $allowedExts = array("gif", "jpeg", "jpg", "png", "psd");
     if(isset($_FILES['file'])):
         $temp = explode(".", $_FILES["file"]["name"]);
         $extension = end($temp);
 
-
-
         if ((($_FILES["file"]["type"] == "image/gif")
                 || ($_FILES["file"]["type"] == "image/jpeg")
                 || ($_FILES["file"]["type"] == "image/jpg")
-                || ($_FILES["file"]["type"] == "image/pjpeg")
+                || ($_FILES["file"]["type"] == "image/JPG")
                 || ($_FILES["file"]["type"] == "image/x-png")
                 || ($_FILES["file"]["type"] == "image/png"))
-            && ($_FILES["file"]["size"] < 20000000)
+            && ($_FILES["file"]["size"] < 100000000)
             && in_array($extension, $allowedExts)) {
             if ($_FILES["file"]["error"] > 0) {
                 echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
@@ -34,16 +51,21 @@ if(Input::exists()) {
                 //echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
                 //echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br>";
 
-                $image = Input::get('id') . '.' .$extension;
+                $image = $lastId . '.' .$extension;
                 if (file_exists("../product-images/" . $image)) {
-                    echo $image . " already exists. ";
+                    Session::flash('imageFile', 'Image already exists : ' . $image);
                 } else {
                     move_uploaded_file($_FILES["file"]["tmp_name"], "../product-images/$image");
+
+                    $db->update('ss_item', $lastId, array(
+                        'image' => $image
+                    ));
                 }
             }
         } else {
-            echo "Invalid filee";
-            echo "Type: " . $_FILES["file"]["type"] . "<br>";
+            Session::flash('imageFile', 'Invalid file type : ' . $_FILES["file"]["type"]);
+            /*echo "Invalid filee";
+            echo "Type: " . $_FILES["file"]["type"] . "<br>";*/
         }
 
     else:
@@ -51,19 +73,8 @@ if(Input::exists()) {
     endif;
 // Upload file Ends.........
 
-    $db = DB::getInstance();
-    $db->insert('ss_item', array(
-        'name' => Input::get('name'),
-        'price' => Input::get('price'),
-        'description' => Input::get('description'),
-        'category' => Input::get('category'),
-        'seller_id' => $user->data()->id,
-        'image' => $image
-    ));
-
-
     Session::flash('item', 'New Item added successfully.');
-    Redirect::to("add-item.php");
+    Redirect::to('add-item.php');
 }
 ?>
 
@@ -74,7 +85,9 @@ if(Input::exists()) {
         <div class="col-md-10">
 
             <?php
-            if(Session::exists('item')) {
+            if(Session::exists('imageFile')) {
+                print_r('<div class="alert alert-danger" role="alert">' . Session::flash('imageFile') . '</div><br>');
+            } elseif(Session::exists('item')) {
                 echo '<div class="alert alert-success" role="alert">' . Session::flash('item') . '</div><br>';
             }
             ?>
@@ -95,13 +108,12 @@ if(Input::exists()) {
                         </div>
                     </div>
                     <div class="panel-body">
-
                         <label class="label">Item Name : <input type="text" name="name" placeholder="Item Name" class="form-control"></label>
                         <label class="label">Description : <input type="text" name="description" placeholder="Description" class="form-control"></label>
                         <label class="label">Price : <input type="text" name="price" placeholder="Price" class="form-control"></label>
                         <label class="label">
-                            <select name="category" class="form-control">
-                                <option>Select Category</option>
+                            <select name="category" id="category" class="form-control" onchange="subCat()">
+                                <option value="">Select Category</option>
                                 <?php
                                 $db = DB::getInstance();
                                 $data = $db->action('SELECT *', 'ss_category', array('1', '=', '1'));
@@ -113,7 +125,8 @@ if(Input::exists()) {
                                 }
                                 ?>
                             </select>
-                        </label><br>
+                        </label>
+                        <label class="label" id="subCategory"></label> <br>
                         <label>Add Image : <input type="file" name="file" class=""></label>
 
                     </div>

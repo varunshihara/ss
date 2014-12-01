@@ -30,6 +30,7 @@ function cart(id)
 /**
  * mouse over effect to items
  */
+/*
 $(document).ready(function(){
     $("#over").css("border", "1px solid #fff");
 
@@ -40,4 +41,4 @@ $(document).ready(function(){
     $("#over").mouseout(function(){
         $(this).css({"border":"1px solid #fff", "boxShadow":"0px 0px 0px"});
     });
-});
+});*/

@@ -23,6 +23,7 @@ if(!$user->isLoggedIn()) {
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <script src="../js/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="script/ajax.js"></script>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/modal.css">
     <script type="text/javascript" src="tinymce/tinymce.min.js"></script>

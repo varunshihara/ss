@@ -19,7 +19,7 @@ if(Session::exists('home')) {
         <h1>Images</h1>
     </div>-->
     <!-- Start Slider section -->
-    <div id="wowslider-container1">
+    <!--<div id="wowslider-container1">
         <div class="ws_images">
             <ul>
                 <li><img src="data1/images/1.jpg" alt="1" title="" id="wows1_0"/></li>
@@ -38,28 +38,61 @@ if(Session::exists('home')) {
         </div>
     </div>
     <script type="text/javascript" src="engine1/wowslider.js"></script>
-    <script type="text/javascript" src="engine1/script.js"></script>
+    <script type="text/javascript" src="engine1/script.js"></script>-->
+    <div class="container">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="data1/images/1.jpg" alt="">
+            </div>
+            <div class="item">
+                <img src="data1/images/2.jpg" alt="">
+            </div>
+            <div class="item">
+                <img src="data1/images/3.jpg" alt="">
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
     <!-- End Slider section -->
 
-    <div class="container">
+
         <h3>Latest Products</h3>
         <div class="row">
             <?php
             $db = DB::getInstance();
-            $items = $db->action('SELECT *', 'ss_item', array("1", "=", "1"), 4);
+            $items = $db->action('SELECT *', 'ss_item', array("1", "=", "1"), 8);
+            $count = $items->count();
             $items = $items->results();
-            for($x = 0; $x<4; $x++) {
+            for($x = 0; $x<$count; $x++) {
             ?>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div id="over" class="over">
-                    <div class="image">
-                        <img src="product-images/<?=$items[$x]->image ?>" width="100%">
-                    </div>
-                    <div class="info">
-                        <a href="item.php?id=<?=$items[$x]->id ?>"><?=$items[$x]->name ?></a>
-                        <!--<div><hr><b>Rs : <?/*=$items[$x]->price */?></b><hr></div>-->
-                        <?=$items[$x]->description ?><hr>
-                        <button class="btn btn-primary center-block" onclick="cart('<?=$items[$x]->id ?>')">Add to Cart</button>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div id="over" class="thumbnail">
+                    <!--<div class="image">-->
+                        <img src="product-images/<?=$items[$x]->image ?>" class="img-responsive">
+                    <!--</div>-->
+                    <div class="caption">
+                        <b><a href="item.php?id=<?=$items[$x]->id ?>"><?=$items[$x]->name ?></a></b>
+                        <br>Rs : <?=$items[$x]->price ?>
+                        <p><?=$items[$x]->description ?></p>
+                        <button class="btn btn-primary btn-block center-block" onclick="cart('<?=$items[$x]->id ?>')">Add to Cart</button>
                     </div>
                 </div>
             </div>

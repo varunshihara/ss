@@ -112,7 +112,6 @@ class DB {
         if(!$this->query($sql, $fields)->error()) {
             return true;
         }
-
         return false;
     }
 
@@ -148,5 +147,9 @@ class DB {
             }
         }
         return false;
+    }
+
+    public function lastId() {
+        return $this->_pdo->lastInsertId();
     }
 }

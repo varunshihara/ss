@@ -23,16 +23,6 @@ if(!$user->hasPermission('admin')) {
             $db = DB::getInstance();
 
             /**
-             * to change user role
-             */
-            if(Input::exists() && Input::get('group')) {
-                $db->update("`ss_user`", Input::get('id'), array(
-                    'group' => Input::get('group')
-                ));
-                //echo $db->error();
-            }
-
-            /**
              * Admins data
              */
             $admin = $db->action('SELECT *', 'ss_user', array('`group`', '=', '2'));
@@ -83,7 +73,6 @@ if(!$user->hasPermission('admin')) {
                         <th>Name</th>
                         <th>Email</th>
                         <th>Role</th>
-                        <th>Action</th>
                     </tr>
                     <?php
                     if(Input::exists('get')) {
@@ -140,14 +129,11 @@ if(!$user->hasPermission('admin')) {
                                             <option value='3'>Seller</option>
                                             <option value='2'>Admin</option>
                                             <option value='1'>User</option>
-                                        </select>
-                                    ";
+                                        </select>";
                                 }
                                 ?>
                                 </form>
                             </td>
-
-                            <td><a href="#">Edit</a></td>
                         </tr>
                     <?php   } ?>
                 </table>
@@ -157,5 +143,16 @@ if(!$user->hasPermission('admin')) {
         <div class="col-md-1"></div>
     </div>
 <?php
+/**
+ * to change user role
+ */
+if(Input::exists()) {
+    $id = Input::get('id');
+    $db->update("ss_user", $id, array(
+        '`group`' => Input::get('group')
+    ));
+    Redirect::to('users.php');
+}
+
 require_once 'footer.php';
 ?>
