@@ -15,7 +15,7 @@ if(isset($_POST['category'])) {
         <select name="subCategory" class="form-control">
             <option value="">Select Sub Category</option>
             <?php for($x = 0; $x<$count; $x++) { ?>
-            <option value="<?php echo $subCategory[$x]->sub_category; ?>"><?php echo $subCategory[$x]->sub_category; ?></option>
+            <option value="<?php echo $subCategory[$x]->id; ?>"><?php echo $subCategory[$x]->sub_category; ?></option>
             <?php } ?>
         </select>
 <?php

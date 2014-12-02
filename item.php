@@ -34,6 +34,10 @@ if(Input::exists('get')) {
                     <div class="col-sm-3">
                         <p><?=$item[0]->description ?></p>
                         <p><b>Price : </b>Rs.<?=$item[0]->price ?></p>
+                        <?php
+                        $name = $db->get('ss_user', array('id', '=', $item[0]->seller_id));
+                        ?>
+                        <p><b>Seller : </b><?=$name->results()[0]->name ?></p>
                         <div class="btn-buy">
                             <form action="cart.php" method="post">
                                 <input type="hidden" name="id" value="<?=$item[0]->id ?>">

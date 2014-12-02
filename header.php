@@ -61,7 +61,7 @@ $user = new User();
                                     <?php
                                     $subCount = $category->subRows();
                                     for($y = 0; $y<$subCount; $y++) {
-                                        echo '<li><a href="#">' . $subCategory[$y]->sub_category . '</a></li>';
+                                        echo '<li><a href="category.php?subCategory='.$subCategory[$y]->id.'">' . $subCategory[$y]->sub_category . '</a></li>';
                                     }
                                     ?>
                                     <li class="divider"></li>

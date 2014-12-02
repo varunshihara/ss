@@ -39,12 +39,13 @@ if(Session::exists('home')) {
                 <?php
 
                 if(Input::exists('get')) {
-                    $category = Input::get('category');
-                    $result = $db->get('ss_item', array('category', '=', $category));
-                    $items = $result->results();
-                    $count = $result->count();
-                    if($count == 0) {
-                        ?>
+                    if(Input::get('category')) {
+                        $category = Input::get('category');
+                        $result = $db->get('ss_item', array('category', '=', $category));
+                        $items = $result->results();
+                        $count = $result->count();
+                        if($count == 0) {
+                            ?>
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="noItems">
@@ -53,46 +54,101 @@ if(Session::exists('home')) {
                                 </div>
                             </div>
                         <?php
-                    } else {
+                        } else {
 
-                        for($x = 0; $x<$count; $x++) {
-                            ?>
-                            <div class="row">
-                                <?php
-                                $y=0;
-                                for($y = 0; $y < 3; $y++) {
-                                    ?>
-                                    <div class="col-sm-6 col-md-3 col-lg-4">
-                                        <?php
-                                        if($x>=$count) {
-                                            echo '';
-                                        } else {
-                                            ?>
-                                            <div id="over" class="thumbnail">
+                            for($x = 0; $x<$count; $x++) {
+                                ?>
+                                <div class="row">
+                                    <?php
+                                    $y=0;
+                                    for($y = 0; $y < 3; $y++) {
+                                        ?>
+                                        <div class="col-sm-6 col-md-3 col-lg-4">
+                                            <?php
+                                            if($x>=$count) {
+                                                echo '';
+                                            } else {
+                                                ?>
+                                                <div id="over" class="thumbnail">
 
                                                     <img src="product-images/<?=$items[$x]->image ?>" width="100%">
 
-                                                <div class="caption">
-                                                    <b><a href="item.php?id=<?=$items[$x]->id ?>"><?=$items[$x]->name ?></a></b>
-                                                    <br>Rs : <?=$items[$x]->price ?>
-                                                    <p><?=$items[$x]->description ?></p>
-                                                    <button class="btn btn-primary btn-block center-block" onclick="cart('<?=$items[$x]->id ?>')">Add to Cart</button>
+                                                    <div class="caption">
+                                                        <b><a href="item.php?id=<?=$items[$x]->id ?>"><?=$items[$x]->name ?></a></b>
+                                                        <br>Rs : <?=$items[$x]->price ?>
+                                                        <p><?=$items[$x]->description ?></p>
+                                                        <button class="btn btn-primary btn-block center-block" onclick="cart('<?=$items[$x]->id ?>')">Add to Cart</button>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            <?php
+                                            }
+                                            ?>
+                                        </div>
                                         <?php
-                                        }
-                                        ?>
+                                        $x++;
+                                    }
+                                    $x--;
+                                    ?>
+                                </div>
+                            <?php
+                            }
+                        }
+                    } elseif(Input::get('subCategory')) {
+                        $subCategory = Input::get('subCategory');
+                        $result = $db->get('ss_item', array('sub_category', '=', $subCategory));
+                        $items = $result->results();
+                        $count = $result->count();
+                        if($count == 0) {
+                            ?>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="noItems">
+                                        <h2>Currently, there is no Items in this category.</h2>
                                     </div>
-                                    <?php
-                                    $x++;
-                                }
-                                $x--;
-                                ?>
+                                </div>
                             </div>
                         <?php
-                        }
-                    }
+                        } else {
 
+                            for($x = 0; $x<$count; $x++) {
+                                ?>
+                                <div class="row">
+                                    <?php
+                                    $y=0;
+                                    for($y = 0; $y < 3; $y++) {
+                                        ?>
+                                        <div class="col-sm-6 col-md-3 col-lg-4">
+                                            <?php
+                                            if($x>=$count) {
+                                                echo '';
+                                            } else {
+                                                ?>
+                                                <div id="over" class="thumbnail">
+
+                                                    <img src="product-images/<?=$items[$x]->image ?>" width="100%">
+
+                                                    <div class="caption">
+                                                        <b><a href="item.php?id=<?=$items[$x]->id ?>"><?=$items[$x]->name ?></a></b>
+                                                        <br>Rs : <?=$items[$x]->price ?>
+                                                        <p><?=$items[$x]->description ?></p>
+                                                        <button class="btn btn-primary btn-block center-block" onclick="cart('<?=$items[$x]->id ?>')">Add to Cart</button>
+                                                    </div>
+                                                </div>
+                                            <?php
+                                            }
+                                            ?>
+                                        </div>
+                                        <?php
+                                        $x++;
+                                    }
+                                    $x--;
+                                    ?>
+                                </div>
+                            <?php
+                            }
+                        }
+
+                    }
                 }
                 ?>
 

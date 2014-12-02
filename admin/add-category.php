@@ -2,7 +2,7 @@
 require_once 'header.php';
 // Permissions....
 
-if(!$user->hasPermission('admin')) {
+if($user->hasPermission('user')) {
     Redirect::to($_SERVER["DOCUMENT_ROOT"] . 'ss/');
 }
 

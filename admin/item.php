@@ -74,107 +74,130 @@ if($user->hasPermission('user')) {
                                     <!-- category -->
                                     <td><label for="<?php echo $data->results()[$x]->id; ?>"><?php echo $data->results()[$x]->category; ?></label></td>
                                     <!-- edit -->
-                                    <td><a href="?id=<?php echo $data->results()[$x]->id . "&name=" . $data->results()[$x]->name . "&price=" . $data->results()[$x]->price . "&category=" . $data->results()[$x]->category . "&description=" . $data->results()[$x]->description; ?>&#edit">Edit</a></td>
+                                    <td>
+                                        <a href="edit-item.php?id=<?php echo $data->results()[$x]->id . "&name=" . $data->results()[$x]->name . "&price=" . $data->results()[$x]->price . "&category=" . $data->results()[$x]->category . "&description=" . $data->results()[$x]->description; ?>&#edit">
+                                            Edit
+                                        </a>
+                                    </td>
                                 </tr>
                             <?php   } ?>
                         </table>
                     </form>
 
                     <!-- Edit Popup Modal -->
-                    <div class="modall" id="edit">
-                        <div class="modal-container">
-                            <?php
-                            if(Input::exists("get")) {
-                                ?>
-                                <h4>Edit</h4><hr>
-                                <form action="#" method="post" enctype="multipart/form-data">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <input type="hidden" name="id" value="<?php echo Input::get("id"); ?>" class="form-control">
-                                            <label>Name : <input type="text" name="name" value="<?php echo Input::get("name"); ?>" class="form-control" required></label><br>
-                                            <label>Price : <input type="text" name="price" value="<?php echo Input::get("price"); ?>" class="form-control" required></label><br>
-                                            <label>Category : <select name="category" class="form-control" required>
-                                                <option>Select Category</option>
-                                                <?php
-                                                $db = DB::getInstance();
-                                                $data = $db->action('SELECT *', 'ss_category', array('1', '=', '1'));
-                                                $count = $data->count();
-                                                for($x = 0; $x<$count; $x++) {
-                                                    ?>
-                                                    <option value="<?php echo $data->results()[$x]->category; ?>"><?php echo $data->results()[$x]->category; ?></option>
-                                                <?php
-                                                }
-                                                ?>
-                                            </select></label>
-                                            <label>
-                                                Change / Add Image : <input type="file" class="form-control" name="file">
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>Description : <textarea id="description" name="description"><?php echo Input::get("description");?></textarea></label>
-                                            <button type="submit" class="btn btn-sm btn-success" name="update">Update</button> <a href="#" class="btn btn-sm btn-danger">Cancel</a>
-                                        </div>
-                                    </div>
-                                </form>
-                                <?php
-
-                                if(Input::exists()) {
-                                    // Upload file Starts.........
-
-                                    $allowedExts = array("gif", "jpeg", "jpg", "png", "psd");
-                                    if(isset($_FILES['file'])):
-                                        $temp = explode(".", $_FILES["file"]["name"]);
-                                        $extension = end($temp);
 
 
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                        Launch demo modal
+                    </button>
 
-                                        if ((($_FILES["file"]["type"] == "image/gif")
-                                                || ($_FILES["file"]["type"] == "image/jpeg")
-                                                || ($_FILES["file"]["type"] == "image/jpg")
-                                                || ($_FILES["file"]["type"] == "image/x-png")
-                                                || ($_FILES["file"]["type"] == "image/png"))
-                                            && ($_FILES["file"]["size"] < 100000000)
-                                            && in_array($extension, $allowedExts)) {
-                                            if ($_FILES["file"]["error"] > 0) {
-                                                echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
-                                            } else {
-                                                //echo "Upload: " . $_FILES["file"]["name"] . "<br>";
-                                                //echo "Type: " . $_FILES["file"]["type"] . "<br>";
-                                                //echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
-                                                //echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br>";
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Edit Items</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <?php
+                                    if(Input::exists("get")) {
+                                        ?>
+                                        <h4>Edit</h4><hr>
+                                        <form action="#" method="post" enctype="multipart/form-data">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <input type="hidden" name="id" value="<?php echo Input::get("id"); ?>" class="form-control">
+                                                    <label>Name : <input type="text" name="name" value="<?php echo Input::get("name"); ?>" class="form-control" required></label><br>
+                                                    <label>Price : <input type="text" name="price" value="<?php echo Input::get("price"); ?>" class="form-control" required></label><br>
+                                                    <label>Category : <select name="category" class="form-control" required>
+                                                            <option>Select Category</option>
+                                                            <?php
+                                                            $db = DB::getInstance();
+                                                            $data = $db->action('SELECT *', 'ss_category', array('1', '=', '1'));
+                                                            $count = $data->count();
+                                                            for($x = 0; $x<$count; $x++) {
+                                                                ?>
+                                                                <option value="<?php echo $data->results()[$x]->category; ?>"><?php echo $data->results()[$x]->category; ?></option>
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                        </select></label>
+                                                    <label>
+                                                        Change / Add Image : <input type="file" class="form-control" name="file">
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label>Description : <textarea id="description" name="description"><?php echo Input::get("description");?></textarea></label>
+                                                    <button type="submit" class="btn btn-sm btn-success" name="update">Update</button> <a href="#" class="btn btn-sm btn-danger">Cancel</a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <?php
 
-                                                $image = Input::get('id') . '.' .$extension;
-                                                if (file_exists("../product-images/" . $image)) {
-                                                    echo $image . " already exists. ";
+                                        if(Input::exists()) {
+                                            // Upload file Starts.........
+
+                                            $allowedExts = array("gif", "jpeg", "jpg", "png", "psd");
+                                            if(isset($_FILES['file'])):
+                                                $temp = explode(".", $_FILES["file"]["name"]);
+                                                $extension = end($temp);
+
+
+
+                                                if ((($_FILES["file"]["type"] == "image/gif")
+                                                        || ($_FILES["file"]["type"] == "image/jpeg")
+                                                        || ($_FILES["file"]["type"] == "image/jpg")
+                                                        || ($_FILES["file"]["type"] == "image/x-png")
+                                                        || ($_FILES["file"]["type"] == "image/png"))
+                                                    && ($_FILES["file"]["size"] < 100000000)
+                                                    && in_array($extension, $allowedExts)) {
+                                                    if ($_FILES["file"]["error"] > 0) {
+                                                        echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
+                                                    } else {
+                                                        //echo "Upload: " . $_FILES["file"]["name"] . "<br>";
+                                                        //echo "Type: " . $_FILES["file"]["type"] . "<br>";
+                                                        //echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
+                                                        //echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br>";
+
+                                                        $image = Input::get('id') . '.' .$extension;
+                                                        if (file_exists("../product-images/" . $image)) {
+                                                            echo $image . " already exists. ";
+                                                        } else {
+                                                            move_uploaded_file($_FILES["file"]["tmp_name"], "../product-images/$image");
+                                                        }
+                                                    }
                                                 } else {
-                                                    move_uploaded_file($_FILES["file"]["tmp_name"], "../product-images/$image");
+                                                    echo "Invalid file";
+                                                    echo "Type: " . $_FILES["file"]["type"] . "<br>";
                                                 }
-                                            }
-                                        } else {
-                                            echo "Invalid file";
-                                            echo "Type: " . $_FILES["file"]["type"] . "<br>";
+
+                                            else:
+                                                echo "Invalid fille";
+                                            endif;
+                                            // Upload file Ends.
+                                            $db = DB::getInstance();
+                                            $db->update("ss_item", Input::get("id"), array(
+                                                'name' => Input::get('name'),
+                                                'price' => Input::get('price'),
+                                                'category'=>Input::get('category'),
+                                                'description'=>Input::get('description'),
+                                                'image' => $image
+                                            ));
+
+                                            Redirect::to("../product-images/index.php?image=$image");
                                         }
-
-                                    else:
-                                        echo "Invalid fille";
-                                    endif;
-                                    // Upload file Ends.
-                                    $db = DB::getInstance();
-                                    $db->update("ss_item", Input::get("id"), array(
-                                        'name' => Input::get('name'),
-                                        'price' => Input::get('price'),
-                                        'category'=>Input::get('category'),
-                                        'description'=>Input::get('description'),
-                                        'image' => $image
-                                    ));
-
-                                    Redirect::to("../product-images/index.php?image=$image");
-                                }
-                            }
-                            ?>
+                                    }
+                                    ?>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
                 </div>
             </div>
 
