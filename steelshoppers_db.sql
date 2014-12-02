@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2014 at 02:45 PM
+-- Generation Time: Dec 02, 2014 at 01:18 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -41,8 +41,7 @@ INSERT INTO `ss_category` (`id`, `category`, `description`) VALUES
 (1, 'Glass', 'Glass Description'),
 (2, 'Plates', 'Plates Description'),
 (6, 'Spoon', '<p><strong>Steel Spoons</strong></p>'),
-(7, 'Kitchen Ware', '<p>Steel Kitchen&nbsp;Ware</p>'),
-(8, 'Steel Clip', '');
+(7, 'Kitchen Ware', '<p>Steel Kitchen&nbsp;Ware</p>');
 
 -- --------------------------------------------------------
 
@@ -78,24 +77,22 @@ CREATE TABLE IF NOT EXISTS `ss_item` (
   `price` int(10) NOT NULL,
   `description` varchar(1000) DEFAULT NULL,
   `category` varchar(200) NOT NULL,
+  `sub_category` varchar(10) DEFAULT NULL,
   `seller_id` int(10) DEFAULT NULL,
   `image` varchar(250) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
 
 --
 -- Dumping data for table `ss_item`
 --
 
-INSERT INTO `ss_item` (`id`, `name`, `price`, `description`, `category`, `seller_id`, `image`) VALUES
-(1, 'Cooking Spoons - 4', 650, '<p>Kitchen Spoon Description.</p>', 'Spoon', NULL, '1.jpg'),
-(2, 'Large Plates - 3', 300, '<p>Large Plates Sample Description.</p>', 'Plates', NULL, '2.jpg'),
-(23, 'Glass Set - 6', 250, '<p>Glass Description</p>', 'Glass', 15, '23.jpg'),
-(24, 'Kitchen Spoon Set - 6', 650, '<p>Spoon&nbsp;Description</p>', 'Spoon', 15, '24.jpg'),
-(29, 'Bhagoni', 650, 'Bhagoni Description here', 'Kitchen Ware', 15, '.jpg'),
-(35, 'Glass Set - 6', 50, '<p>Glass Description</p>', 'Spoon', 15, '35.jpg'),
-(42, 'Cooker', 650, 'Cooker Description', 'Kitchen Ware', 18, '42.jpg'),
-(46, 'Cup', 50, 'Cups Demo Description', 'Glass', 18, '46.jpg');
+INSERT INTO `ss_item` (`id`, `name`, `price`, `description`, `category`, `sub_category`, `seller_id`, `image`) VALUES
+(29, 'Bhagoni', 65, '<p>Bhagoni Description here</p>', 'Kitchen Ware', NULL, 15, '29.jpg'),
+(42, 'Cooker', 650, 'Cooker Description', 'Kitchen Ware', NULL, 18, '42.jpg'),
+(46, 'Cup', 50, 'Cups Demo Description', 'Glass', NULL, 18, '46.jpg'),
+(47, 'Spoon Set - 6', 300, 'Spoon Description ...', 'Spoon', NULL, 18, '47.jpg'),
+(48, 'Dinner Set', 250, '<p>Description dinner set ...</p>', 'Kitchen Ware', '7', 18, '48.png');
 
 -- --------------------------------------------------------
 
@@ -139,6 +136,7 @@ CREATE TABLE IF NOT EXISTS `ss_user` (
   `group` varchar(2) NOT NULL,
   `email` varchar(100) NOT NULL,
   `mobile` varchar(15) NOT NULL,
+  `address` varchar(1000) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
@@ -146,11 +144,11 @@ CREATE TABLE IF NOT EXISTS `ss_user` (
 -- Dumping data for table `ss_user`
 --
 
-INSERT INTO `ss_user` (`id`, `username`, `password`, `salt`, `name`, `joined`, `group`, `email`, `mobile`) VALUES
-(15, 'admin', '9d3a8fc707b7e20b7fcfa794edb57456bf1dd85c6339e15005e2d290653245cd', 'h‘¦Ð¶Â‡¢»j<Áj¨Ë×ŽÄjÊ ^–ƒ§pLa/>/', 'Aministrator', '2014-10-20 21:32:23', '2', 'varunshihara@gmail.com', '9638113178'),
-(16, 'root', '58debc7f06ab564c547c3236b79c26b1736049a75094f0c33e46fc52acad91a6', 'Šf\0·¥·?õ}\nç±QDÖjðÅzxˆz''´Ø', 'Root', '2014-10-22 12:56:08', '3', 'neohackd@gmail.com', '9638113178'),
-(17, 'user', 'a412b6c588d7bb12634be22e2cbc5199e7355e071f0f870a2803e50f98fce26c', 'gkTU „•cuK‹½[?{JBR~N”ý5Iˆ«†L ,', 'Customer', '2014-10-24 02:06:06', '1', 'user@email.com', '1234567890'),
-(18, 'seller', '9600a0b6216e4184f0c9ddc01599311d5b5a1984d34c5f6c5eb063b99b5c4d10', 'èÝ	"BÑ¸lôÐ5Èø¸l±¶0¤`6GÏ{½#Ä', 'Seller Name', '2014-10-24 02:18:41', '3', 'seller@email.com', '1234567890');
+INSERT INTO `ss_user` (`id`, `username`, `password`, `salt`, `name`, `joined`, `group`, `email`, `mobile`, `address`) VALUES
+(15, 'admin', '9d3a8fc707b7e20b7fcfa794edb57456bf1dd85c6339e15005e2d290653245cd', 'h‘¦Ð¶Â‡¢»j<Áj¨Ë×ŽÄjÊ ^–ƒ§pLa/>/', 'Aministrator', '2014-10-20 21:32:23', '2', 'varunshihara@gmail.com', '9638113178', ''),
+(16, 'root', '58debc7f06ab564c547c3236b79c26b1736049a75094f0c33e46fc52acad91a6', 'Šf\0·¥·?õ}\nç±QDÖjðÅzxˆz''´Ø', 'Root', '2014-10-22 12:56:08', '3', 'neohackd@gmail.com', '9638113178', ''),
+(17, 'user', 'a412b6c588d7bb12634be22e2cbc5199e7355e071f0f870a2803e50f98fce26c', 'gkTU „•cuK‹½[?{JBR~N”ý5Iˆ«†L ,', 'Customer', '2014-10-24 02:06:06', '1', 'user@email.com', '1234567890', ''),
+(18, 'seller', '9600a0b6216e4184f0c9ddc01599311d5b5a1984d34c5f6c5eb063b99b5c4d10', 'èÝ	"BÑ¸lôÐ5Èø¸l±¶0¤`6GÏ{½#Ä', 'Seller Name', '2014-10-24 02:18:41', '3', 'seller@email.com', '1234567890', 'some address');
 
 -- --------------------------------------------------------
 

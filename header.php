@@ -84,7 +84,6 @@ $user = new User();
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $user->data()->username; ?><span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="profile.php?user=<?php echo escape($user->data()->username); ?>">Profile</a></li>
-                        <li><a href="#">Another action</a></li>
                         <li><a href="changepassword.php">Change Password</a></li>
                         <li class="divider"></li>
                         <li><a href="update.php">Settings</a></li>

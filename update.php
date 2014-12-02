@@ -22,7 +22,10 @@ if(Input::exists()) {
 
             try {
                 $user->update(array(
-                    'name' => Input::get('name')
+                    'name' => Input::get('name'),
+                    'email' => Input::get('email'),
+                    'mobile' => Input::get('mobile'),
+                    'address' => Input::get('address')
                 ));
 
                 Session::flash('update', 'Your details have been updated.');
@@ -57,7 +60,10 @@ if(Input::exists()) {
             </div>
             <div class="panel-body">
                 <form action="" method="post" class="form-group">
-                    <label class="form-group">Name :<input type="text" name="name" value="<?php echo escape($user->data()->name); ?>" class="form-control"></label>
+                    <label class="form-group">Name :<input type="text" name="name" value="<?php echo escape($user->data()->name); ?>" class="form-control"></label><br>
+                    <label class="form-group">Email :<input type="text" name="email" value="<?php echo escape($user->data()->email); ?>" class="form-control"></label><br>
+                    <label class="form-group">Mobile :<input type="text" name="mobile" value="<?php echo escape($user->data()->mobile); ?>" class="form-control"></label><br>
+                    <label class="form-group">Address :<input type="text" name="address" value="<?php echo escape($user->data()->address); ?>" class="form-control"></label><br>
                     <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>

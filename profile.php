@@ -16,7 +16,10 @@ if(!$username = Input::get('user')) {
         <div class="col-md-2"></div>
 
         <div class="col-md-8">
-            <h3><?php echo $data->name; ?></h3>
+            <h3><?php echo $data->name; ?></h3><hr>
+            <?=$data->mobile ?><br>
+            <?=$data->email ?><br>
+            <?=$data->address ?><br>
         </div>
         <div class="col-md-2"></div>
     </div>

@@ -32,11 +32,40 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="category.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="category.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/category.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="41" selection-start="1424" selection-end="1424" vertical-scroll-proportion="1.030303" vertical-offset="204" max-vertical-offset="2907">
+            <state line="46" column="41" selection-start="1424" selection-end="1424" vertical-scroll-proportion="-22.23077" vertical-offset="204" max-vertical-offset="2907">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="update.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/update.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="53" selection-start="648" selection-end="648" vertical-scroll-proportion="-9.807693" vertical-offset="187" max-vertical-offset="1360">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="profile.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/profile.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="21" column="36" selection-start="482" selection-end="482" vertical-scroll-proportion="-13.730769" vertical-offset="0" max-vertical-offset="544">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="header.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/header.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="93" column="18" selection-start="4178" selection-end="4178" vertical-scroll-proportion="0.8181818" vertical-offset="1122" max-vertical-offset="2074">
+              <folding>
+                <element signature="e#4831#4989#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -58,9 +87,7 @@
         <option value="$PROJECT_DIR$/classes/Hash.php" />
         <option value="$PROJECT_DIR$/logout.php" />
         <option value="$PROJECT_DIR$/classes/Cookie.php" />
-        <option value="$PROJECT_DIR$/update.php" />
         <option value="$PROJECT_DIR$/includes/errors/404.php" />
-        <option value="$PROJECT_DIR$/profile.php" />
         <option value="$PROJECT_DIR$/admin/config.php" />
         <option value="$PROJECT_DIR$/register.php" />
         <option value="$PROJECT_DIR$/changepassword.php" />
@@ -97,11 +124,13 @@
         <option value="$PROJECT_DIR$/admin/item.php" />
         <option value="$PROJECT_DIR$/admin/edit-category.php" />
         <option value="$PROJECT_DIR$/admin/add-category.php" />
-        <option value="$PROJECT_DIR$/header.php" />
         <option value="$PROJECT_DIR$/admin/script/ajax.php" />
         <option value="$PROJECT_DIR$/admin/edit-item.php" />
         <option value="$PROJECT_DIR$/category.php" />
         <option value="$PROJECT_DIR$/admin/category.php" />
+        <option value="$PROJECT_DIR$/update.php" />
+        <option value="$PROJECT_DIR$/profile.php" />
+        <option value="$PROJECT_DIR$/header.php" />
       </list>
     </option>
   </component>
@@ -277,11 +306,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../opencart-1.5.6.4/upload/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="67" selection-start="0" selection-end="1119" vertical-scroll-proportion="0.05944056" vertical-offset="0" max-vertical-offset="572" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../opencart-1.5.6.4/upload/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="19" column="0" selection-start="306" selection-end="356" vertical-scroll-proportion="0.57781756" vertical-offset="0" max-vertical-offset="4182" />
@@ -412,11 +436,6 @@
         <state line="114" column="59" selection-start="4092" selection-end="4092" vertical-scroll-proportion="0.7878788" vertical-offset="1496" max-vertical-offset="2737" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/profile.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="30" selection-start="103" selection-end="103" vertical-scroll-proportion="0.14808363" vertical-offset="0" max-vertical-offset="574" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/classes/User.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="97" column="12" selection-start="3049" selection-end="3049" vertical-scroll-proportion="2.0818815" vertical-offset="454" max-vertical-offset="2227">
@@ -457,7 +476,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/classes/Validate.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="41" selection-start="1258" selection-end="1258" vertical-scroll-proportion="0.33275262" vertical-offset="370" max-vertical-offset="1224" />
+        <state line="33" column="41" selection-start="1258" selection-end="1258" vertical-scroll-proportion="0.33275262" vertical-offset="370" max-vertical-offset="1224">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/script/ajax.js">
@@ -521,15 +542,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/header.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="106" selection-start="2809" selection-end="2809" vertical-scroll-proportion="-9.807693" vertical-offset="816" max-vertical-offset="2091">
-          <folding>
-            <element signature="e#4895#5053#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/script/ajax.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="27" selection-start="553" selection-end="553" vertical-scroll-proportion="-9.807693" vertical-offset="0" max-vertical-offset="476">
@@ -567,8 +579,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/category.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="41" selection-start="1424" selection-end="1424" vertical-scroll-proportion="1.030303" vertical-offset="204" max-vertical-offset="2907">
+        <state line="46" column="41" selection-start="1424" selection-end="1424" vertical-scroll-proportion="-22.23077" vertical-offset="204" max-vertical-offset="2907">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/update.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="53" selection-start="648" selection-end="648" vertical-scroll-proportion="-9.807693" vertical-offset="187" max-vertical-offset="1360">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/profile.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="36" selection-start="482" selection-end="482" vertical-scroll-proportion="-13.730769" vertical-offset="0" max-vertical-offset="544">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="93" column="18" selection-start="4178" selection-end="4178" vertical-scroll-proportion="0.8181818" vertical-offset="1122" max-vertical-offset="2074">
+          <folding>
+            <element signature="e#4831#4989#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
