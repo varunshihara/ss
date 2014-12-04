@@ -111,7 +111,7 @@ class User {
     public function logout() {
 
         $this->_db->delete('ss_user_session', array('user_id', '=', $this->data()->id));
-
+        unset($_SESSION['cart']);
         Session::delete($this->_sessionName);
         Cookie::delete($this->_cookieName);
     }

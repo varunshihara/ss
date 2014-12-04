@@ -41,6 +41,7 @@ if(Session::exists('home')) {
                 if(Input::exists('get')) {
                     if(Input::get('category')) {
                         $category = Input::get('category');
+
                         $result = $db->get('ss_item', array('category', '=', $category));
                         $items = $result->results();
                         $count = $result->count();
